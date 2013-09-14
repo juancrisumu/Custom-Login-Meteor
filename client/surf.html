@@ -1,0 +1,60 @@
+<head>
+    <title>Powder</title>
+</head>
+
+<body>
+ {{> header}}
+</body>
+
+<template name="header">
+    <div class="navbar navbar-inverse">
+  		<div class="navbar-inner">
+       		<div class="container">
+          		<a class="brand" href="#">Powder</a>
+  			<form class="navbar-search pull-left">
+  				<input type="text" class="search-query" placeholder="Search">
+			</form>
+          	<div class="nav pull_right">
+            	{{> user_info}}
+          	</div>
+       		</div>
+		</div>
+    </div>
+</template>
+
+<template name="user_info">
+  <ul class="nav pull-right">
+    {{#if currentUser}}
+    	{{> user_loggedin}}
+	{{else}}
+		{{> user_loggedout}}
+    {{/if}}
+  </ul>  
+</template>
+
+
+<template name="user_loggedin">
+	{{#if loggingIn}}
+	  	<li><a href="">Loggin in...</a></li>
+	{{else}}
+		<li>
+			<img src="{{currentUser.profile.avatar_url}}" class="img-rounded" style="height: 32px; margin-top: 4px;">
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				{{currentUser.profile.login}}
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li><a href="">Accounts Settings</a></li>
+				<li class="divider"></li>
+				<li><a id="logout">logout</a></li>
+			</ul>
+		</li>
+	{{/if}}
+</template>
+
+
+<template name="user_loggedout">
+  <li><a id="login">Login with Github</a></li>
+</template>
